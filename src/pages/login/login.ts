@@ -41,6 +41,7 @@ export class LoginPage {
     } else {
       console.log(response.token);
       await this.storage.set('jwt', response.token);
+      await this.storage.set('userid', response.userid)
       await this.navCtrl.setRoot('HomescreenPage')
     }
 

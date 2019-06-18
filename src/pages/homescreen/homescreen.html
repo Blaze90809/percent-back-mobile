@@ -1,12 +1,41 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>homescreen</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <h1>Enter Your Races</h1>
+  <ion-card>
+    <ion-card-header>Race Information</ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Race Name</ion-label>
+          <ion-input type="text" [(ngModel)]="raceName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Race Distance</ion-label>
+          <ion-input type="text" [(ngModel)]="raceDistance"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Start Time</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="raceDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>First Place Finisher's Time</ion-label>
+          <ion-input [(ngModel)]="firstPlaceTime" type="time"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Your Time</ion-label>
+            <ion-input [(ngModel)]="yourTime" type="time"></ion-input>
+          </ion-item>
+      </ion-list>
+      <button ion-button full (click)="calcPB()">Full Button</button>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
