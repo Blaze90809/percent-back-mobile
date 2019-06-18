@@ -20,8 +20,12 @@ export class HomescreenPage {
   raceName: string;
   raceDistance: number;
   raceDate: Date;
-  firstPlaceTime: Time;
-  yourTime: Time;
+  firstPlaceTimeHours: number;
+  firstPlaceTimeMinutes: number;
+  firstPlaceTimeSeconds: number;
+  yourTimeHours: number;
+  yourTimeMinutes: number;
+  yourTimeSecounds: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private API: ApiProvider) {
   }
@@ -32,7 +36,7 @@ export class HomescreenPage {
   }
 
   async calcPB() {
-    const difference = this.firstPlaceTime.minutes - this.firstPlaceTime.minutes;
+    const difference = this.firstPlaceTime.minutes - this.firstPlaceTimeHours;
     const percentBack = ((difference / this.firstPlaceTime.minutes) * 100).toFixed(2);
     console.log(percentBack);
   }

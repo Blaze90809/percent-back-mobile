@@ -22,19 +22,35 @@
           <ion-input type="text" [(ngModel)]="raceDistance"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Start Time</ion-label>
+          <ion-label floating>Start Time</ion-label>
           <ion-datetime displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="raceDate"></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label>First Place Finisher's Time</ion-label>
-          <ion-input [(ngModel)]="firstPlaceTime" type="time"></ion-input>
+          <ion-label floating>First Place Finisher's Time (Hours)</ion-label>
+          <ion-input [(ngModel)]="firstPlaceTimeHours" type="number"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>Your Time</ion-label>
-            <ion-input [(ngModel)]="yourTime" type="time"></ion-input>
-          </ion-item>
+          <ion-label floating>First Place Finisher's Time (Minutes)</ion-label>
+          <ion-input [(ngModel)]="firstPlaceTimeMinutes" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>First Place Finisher's Time (Seconds)</ion-label>
+          <ion-input [(ngModel)]="firstPlaceTimeSeconds" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Your Time (Hours)</ion-label>
+          <ion-input [(ngModel)]="yourTimeHours" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Your Time (Minutes)</ion-label>
+          <ion-input [(ngModel)]="yourTimeMinutes" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Your Time (Secounds)</ion-label>
+          <ion-input [(ngModel)]="yourTimeSecounds" type="number"></ion-input>
+        </ion-item>
       </ion-list>
-      <button ion-button full (click)="calcPB()">Full Button</button>
+      <button ion-button full (click)="calcPB()">Calculate Percent Back</button>
     </ion-card-content>
   </ion-card>
 
