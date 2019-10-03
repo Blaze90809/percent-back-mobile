@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { RaceRequest } from '../../models/api';
 
 /*
   Generated class for the ApiProvider provider.
@@ -52,12 +53,33 @@ export class ApiProvider {
     const userid = await this.storage.get('userid');
 
     try {
-      const response = await this.http.get(`${this.url}/races/${userid}`, { 'headers': headers }).toPromise();
+      const response = await this.http.get<any>(`${this.url}/races/${userid}`, { 'headers': headers }).toPromise();
 
       return response
     } catch (error) {
       console.log(error)
     }
+  }
+
+  async PostRace(req: RaceRequest) {
+
+    const JWT = await this.storage.get('jwt');
+    const userid = await this.storage.get('userid');
+    const headers = new HttpHeaders({
+      'Authorization': JWT,
+      'user': userid
+    })
+
+    try {
+      const response = await this.http.post<any>(`${this.url}/races`, req, {'headers': headers}).toPromise();
+
+      if (response.status === 200) {
+        return response;
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
 }

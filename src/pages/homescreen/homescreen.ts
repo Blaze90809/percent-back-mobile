@@ -1,7 +1,9 @@
+import { RaceRequest } from './../../models/api';
 import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Time } from '@angular/common';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the HomescreenPage page.
@@ -27,18 +29,34 @@ export class HomescreenPage {
   yourTimeMinutes: number;
   yourTimeSecounds: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private API: ApiProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private API: ApiProvider, private storage: Storage) {
   }
 
   async ionViewDidLoad() {
-    const response = await this.API.GetRaces();
-    console.log(response);
+    await this.getRaces();
   }
 
   async calcPB() {
-    const difference = this.firstPlaceTime.minutes - this.firstPlaceTimeHours;
-    const percentBack = ((difference / this.firstPlaceTime.minutes) * 100).toFixed(2);
-    console.log(percentBack);
+    const firstPlaceTime = ((+this.firstPlaceTimeHours * 60) + +this.firstPlaceTimeMinutes + (+this.firstPlaceTimeSeconds * 0.0166667))
+    const yourTime = ((+this.yourTimeHours * 60) + +this.yourTimeMinutes + (+this.yourTimeSecounds * 0.0166667))
+    const difference = (yourTime - firstPlaceTime)
+    const percentBack = ((difference / firstPlaceTime) * 100).toFixed(2);
+
+    const req = new RaceRequest();
+    req.raceName = this.raceName;
+    req.raceDate = this.raceDate.toString();
+    req.raceDistance = this.raceDistance.toString();
+    req.percentBack = +percentBack;
+
+    const response = await this.API.PostRace(req)
+
+    await this.getRaces();
+  }
+
+  async getRaces() {
+    const response = await this.API.GetRaces();
+    console.log(response);
+    await this.storage.set('races', JSON.stringify(response));
   }
 
 }
